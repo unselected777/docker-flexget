@@ -1,0 +1,15 @@
+variables: variables.yml
+tasks:
+  books:
+    rss: 
+      url: https://yggtorrent.is/rss?type=1&parent_category=2140
+    urlrewrite:
+      yggtorrent:
+        regexp: 'https://yggtorrent.is/engine/torrent_generator/torrent_file\?torrent=(?P<id>\d+)/pass'
+        format: 'https://yggtorrent.is/engine/download_torrent?id=\g<id>'
+    headers:
+      Cookie: 'ygg_={? cookie_ygg ?}'
+    content_size:
+      max: 12
+    accept_all: yes
+    download: /home/flexget
